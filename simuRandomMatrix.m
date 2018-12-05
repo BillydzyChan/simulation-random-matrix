@@ -111,11 +111,11 @@ for loop = 2:NFrames
     
     %% 当前帧量测个数
     numberMeas = sum(~isnan(curMeas(1, :, loop)));
-% %     % 画量测点
-% %     figure(TrackingFig);
-% %     hold off
-% %     plot(curMeas(1, :, loop), curMeas(2, :, loop), '.', 'Color', [0.776, 0.776, 0.776]);
-% %     hold on
+%     % 画量测点
+%     figure(TrackingFig);
+%     hold off
+%     plot(curMeas(1, :, loop), curMeas(2, :, loop), '.', 'Color', [0.776, 0.776, 0.776]);
+%     hold on
     %% 画椭圆波门选取有效点迹
     % 落入波门内的量测
     curComMeas = zeros(2, 1);
@@ -134,16 +134,16 @@ for loop = 2:NFrames
                 curComMeas(:, nk, iTrace) = curMeas(:, indexMeas, loop);
             end
         end
-%         % 画椭圆波门
-%         center = kron(eye(2), H) * kron(eye(2), F) * traceInfor(iTrace).state(:, loop-1);
-%         plot(center(1), center(2), 'b*');
-%         syms x y
-%         ellipse = [x - center(1); y - center(2)]'/ SA * [x - center(1); y - center(2)] - wid_size^2;
-%         z = simplify(ellipse);
-%         h = ezplot(z, [ifelse((xMin - 50) < (yMin - 50), (xMin - 50), (yMin - 50)), xMax + 50]);
-%         set(h, 'Color', 'b');
-%         % 画出筛选后的量测点
-%         plot(curComMeas(1,1:nk,iTrace), curComMeas(2,1:nk,iTrace), '.');
+        % 画椭圆波门
+        center = kron(eye(2), H) * kron(eye(2), F) * traceInfor(iTrace).state(:, loop-1);
+        plot(center(1), center(2), 'b*');
+        syms x y
+        ellipse = [x - center(1); y - center(2)]'/ SA * [x - center(1); y - center(2)] - wid_size^2;
+        z = simplify(ellipse);
+        h = ezplot(z, [ifelse((xMin - 50) < (yMin - 50), (xMin - 50), (yMin - 50)), xMax + 50]);
+        set(h, 'Color', 'b');
+        % 画出筛选后的量测点
+        plot(curComMeas(1,1:nk,iTrace), curComMeas(2,1:nk,iTrace), '.');
     end
     
     %% 求量测的形心（即均值）和量测扩展特性
